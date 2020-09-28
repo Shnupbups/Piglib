@@ -1,7 +1,6 @@
 {
   "replace": false,
   "values": [
-    "minecraft:gold_ingot",
-    "minecraft:dead_bush"
+    "minecraft:gold_ingot"
   ]
 }
