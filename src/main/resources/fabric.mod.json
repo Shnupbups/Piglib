@@ -1,0 +1,27 @@
+{
+  "schemaVersion": 1,
+  "id": "piglib",
+  "version": "1.0.0",
+
+  "name": "Piglib",
+  "description": "Adds tags relating to Piglins that Mojang were too silly to add themselves",
+  "authors": [
+    "Shnupbups"
+  ],
+
+  "license": "LGPLv3",
+  "icon": "assets/piglib/icon.png",
+
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "com.shnupbups.piglib.Piglib"
+    ]
+  },
+  "mixins": ["piglib.mixins.json"],
+
+  "depends": {
+    "fabricloader": ">=0.6.1",
+    "fabric": "*"
+  }
+}

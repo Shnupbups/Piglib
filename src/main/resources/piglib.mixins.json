@@ -1,0 +1,15 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "com.shnupbups.piglib.mixin",
+  "compatibilityLevel": "JAVA_8",
+  "mixins": [
+    "PiglinBrainMixin", "PiglinEntityMixin"
+  ],
+  "client": [
+    
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}
