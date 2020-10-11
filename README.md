@@ -11,6 +11,6 @@ maven {
 ```
 and this in the `dependencies` block
 ```groovy
-modImplementation "com.github.Shnupbups:Piglib:1.0"
+modApi "com.github.Shnupbups:Piglib:1.0"
 include "com.github.Shnupbups:Piglib:1.0"
 ```
