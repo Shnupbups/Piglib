@@ -27,15 +27,12 @@ package com.shnupbups.piglib.mixin;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.Redirect;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.entity.mob.PiglinEntity;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.tag.ItemTags;
 
 import com.shnupbups.piglib.Piglib;
 
@@ -48,10 +45,5 @@ public class PiglinEntityMixin {
 			((MobEntity) (Object) this).updateDropChances(EquipmentSlot.OFFHAND);
 			ci.cancel();
 		}
-	}
-
-	@Redirect(method = "getActivity()Lnet/minecraft/entity/mob/PiglinActivity;", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/mob/PiglinBrain;isGoldenItem(Lnet/minecraft/item/Item;)Z"))
-	private boolean shouldAdmireRedirect(Item item) {
-		return Piglib.shouldAdmire(item);
 	}
 }

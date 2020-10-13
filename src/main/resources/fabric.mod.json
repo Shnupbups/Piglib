@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "id": "piglib",
-  "version": "1.0.0",
+  "version": "1.0.1",
 
   "name": "Piglib",
   "description": "Adds tags relating to Piglins that Mojang were too silly to add themselves",
@@ -10,7 +10,7 @@
   ],
 
   "license": "LGPLv3",
-  "icon": "assets/piglib/icon.png",
+  "icon": "icon.png",
 
   "environment": "*",
   "entrypoints": {

@@ -66,13 +66,13 @@ public abstract class PiglinBrainMixin {
 		return item.isIn(Piglib.PIGLIN_LOVED_NUGGETS) ? Items.GOLD_NUGGET : item;
 	}
 
-	@Redirect(method = "loot(Lnet/minecraft/entity/mob/PiglinEntity;Lnet/minecraft/entity/ItemEntity;)V", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/mob/PiglinBrain;isGoldenItem(Lnet/minecraft/item/Item;)Z"))
-	private static boolean admireLootRedirect(Item item) {
-		return Piglib.shouldAdmire(item);
-	}
-
 	@Inject(method = "canGather(Lnet/minecraft/entity/mob/PiglinEntity;Lnet/minecraft/item/ItemStack;)Z", at = @At(value = "INVOKE_ASSIGN", target = "Lnet/minecraft/entity/mob/PiglinEntity;canInsertIntoInventory(Lnet/minecraft/item/ItemStack;)Z"), cancellable = true, locals = LocalCapture.CAPTURE_FAILHARD)
 	private static void canGatherInject(PiglinEntity piglin, ItemStack stack, CallbackInfoReturnable<Boolean> cir, Item item, boolean bl) {
 		if(item.isIn(Piglib.PIGLIN_LOVED_NUGGETS)) cir.setReturnValue(bl);
+	}
+
+	@Inject(method = "isGoldenItem(Lnet/minecraft/item/Item;)Z", at = @At("RETURN"), cancellable = true)
+	private static void isGoldenItemInject(Item item, CallbackInfoReturnable<Boolean> cir) {
+		cir.setReturnValue(cir.getReturnValue() || Piglib.shouldAdmire(item));
 	}
 }
