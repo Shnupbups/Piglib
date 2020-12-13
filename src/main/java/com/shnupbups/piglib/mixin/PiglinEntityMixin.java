@@ -29,20 +29,26 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
+import net.minecraft.entity.EntityType;
 import net.minecraft.entity.EquipmentSlot;
-import net.minecraft.entity.mob.MobEntity;
+import net.minecraft.entity.mob.AbstractPiglinEntity;
 import net.minecraft.entity.mob.PiglinEntity;
 import net.minecraft.item.ItemStack;
+import net.minecraft.world.World;
 
 import com.shnupbups.piglib.Piglib;
 
 @Mixin(PiglinEntity.class)
-public class PiglinEntityMixin {
+public abstract class PiglinEntityMixin extends AbstractPiglinEntity {
+	private PiglinEntityMixin(EntityType<? extends AbstractPiglinEntity> entityType, World world) {
+		super(entityType, world);
+	}
+
 	@Inject(method = "equipToOffHand(Lnet/minecraft/item/ItemStack;)V", at = @At("HEAD"), cancellable = true)
 	public void equipToOffHandInject(ItemStack stack, CallbackInfo ci) {
-		if (stack.getItem().isIn(Piglib.PIGLIN_BARTERING_ITEMS)) {
-			((MobEntity) (Object) this).equipStack(EquipmentSlot.OFFHAND, stack);
-			((MobEntity) (Object) this).updateDropChances(EquipmentSlot.OFFHAND);
+		if (stack.isIn(Piglib.PIGLIN_BARTERING_ITEMS)) {
+			this.equipStack(EquipmentSlot.OFFHAND, stack);
+			this.updateDropChances(EquipmentSlot.OFFHAND);
 			ci.cancel();
 		}
 	}

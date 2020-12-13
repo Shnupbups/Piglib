@@ -27,7 +27,7 @@ dependencies {
 	
 	// stuff for dev env
 	modCompile "io.github.prospector:modmenu:${project.modmenu_version}"
-    modCompile ("me.shedaniel:RoughlyEnoughItems:${project.rei_version}") { exclude(module: 'ModMenu') }
+    // modCompile ("me.shedaniel:RoughlyEnoughItems:${project.rei_version}") { exclude(module: 'ModMenu') }
 }
 
 processResources {
