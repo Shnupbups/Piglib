@@ -25,7 +25,6 @@
 package com.shnupbups.piglib.mixin;
 
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.Redirect;
@@ -38,7 +37,6 @@ import net.minecraft.entity.mob.PiglinEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
-import net.minecraft.tag.ItemTags;
 
 import com.shnupbups.piglib.Piglib;
 
