@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "id": "piglib",
-  "version": "1.0.1",
+  "version": "$version",
 
   "name": "Piglib",
   "description": "Adds tags relating to Piglins that Mojang were too silly to add themselves",
@@ -16,6 +16,10 @@
   "entrypoints": {
     "main": [
       "com.shnupbups.piglib.Piglib"
+    ],
+    "rei": [
+      "com.shnupbups.piglib.rei.PiglibPlugin",
+      "com.shnupbups.piglib.rei.PiglibClientPlugin"
     ]
   },
   "mixins": ["piglib.mixins.json"],

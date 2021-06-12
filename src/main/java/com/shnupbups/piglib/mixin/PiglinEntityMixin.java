@@ -24,19 +24,17 @@
 
 package com.shnupbups.piglib.mixin;
 
-import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-
+import com.shnupbups.piglib.Piglib;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.mob.AbstractPiglinEntity;
 import net.minecraft.entity.mob.PiglinEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
-
-import com.shnupbups.piglib.Piglib;
+import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(PiglinEntity.class)
 public abstract class PiglinEntityMixin extends AbstractPiglinEntity {
