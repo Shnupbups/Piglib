@@ -2,8 +2,8 @@ package com.shnupbups.piglib;
 
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.tag.TagRegistry;
-
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.tag.ItemTags;
 import net.minecraft.tag.Tag;
 import net.minecraft.util.Identifier;
@@ -15,8 +15,8 @@ public class Piglib implements ModInitializer {
 	public static Tag<Item> PIGLIN_LOVED_NUGGETS;
 	public static Tag<Item> PIGLIN_BARTERING_ITEMS;
 
-	public static boolean shouldAdmire(Item item) {
-		return item.isIn(ItemTags.PIGLIN_LOVED) || item.isIn(Piglib.PIGLIN_BARTERING_ITEMS);
+	public static boolean shouldAdmire(ItemStack stack) {
+		return stack.isIn(ItemTags.PIGLIN_LOVED) || stack.isIn(Piglib.PIGLIN_BARTERING_ITEMS);
 	}
 
 	@Override

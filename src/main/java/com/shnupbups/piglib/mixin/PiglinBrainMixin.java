@@ -24,55 +24,49 @@
 
 package com.shnupbups.piglib.mixin;
 
+import com.shnupbups.piglib.Piglib;
+import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.mob.PiglinBrain;
+import net.minecraft.entity.mob.PiglinEntity;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.Redirect;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import org.spongepowered.asm.mixin.injection.callback.LocalCapture;
 
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.mob.PiglinBrain;
-import net.minecraft.entity.mob.PiglinEntity;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
-import net.minecraft.tag.ItemTags;
-
-import com.shnupbups.piglib.Piglib;
-
 import java.util.Iterator;
 
 @Mixin(PiglinBrain.class)
 public abstract class PiglinBrainMixin {
-	@Inject(method = "acceptsForBarter(Lnet/minecraft/item/Item;)Z", at = @At("RETURN"), cancellable = true)
-	private static void acceptsForBarterInject(Item item, CallbackInfoReturnable<Boolean> cir) {
-		if (item.isIn(Piglib.PIGLIN_BARTERING_ITEMS)) {
+	@Inject(method = "acceptsForBarter(Lnet/minecraft/item/ItemStack;)Z", at = @At("RETURN"), cancellable = true)
+	private static void acceptsForBarterInject(ItemStack stack, CallbackInfoReturnable<Boolean> cir) {
+		if (stack.isIn(Piglib.PIGLIN_BARTERING_ITEMS)) {
 			cir.setReturnValue(true);
 		}
 	}
 
 	@Inject(method = "wearsGoldArmor(Lnet/minecraft/entity/LivingEntity;)Z", at = @At(value = "INVOKE_ASSIGN", target = "Lnet/minecraft/item/ItemStack;getItem()Lnet/minecraft/item/Item;"), cancellable = true, locals = LocalCapture.CAPTURE_FAILHARD)
 	private static void wearsGoldArmorInject(LivingEntity entity, CallbackInfoReturnable<Boolean> cir, Iterable<ItemStack> iterable, Iterator iterator, ItemStack stack, Item item) {
-		if (item.isIn(Piglib.PIGLIN_SAFE_ARMOR)) {
+		if (stack.isIn(Piglib.PIGLIN_SAFE_ARMOR)) {
 			cir.setReturnValue(true);
 		}
 	}
 
-	@Redirect(method = "loot(Lnet/minecraft/entity/mob/PiglinEntity;Lnet/minecraft/entity/ItemEntity;)V", at = @At(value = "INVOKE", target = "Lnet/minecraft/item/ItemStack;getItem()Lnet/minecraft/item/Item;"))
-	private static Item nuggetLootRedirect(ItemStack stack) {
-		Item item = stack.getItem();
-		return item.isIn(Piglib.PIGLIN_LOVED_NUGGETS) ? Items.GOLD_NUGGET : item;
+	@Redirect(method = "loot(Lnet/minecraft/entity/mob/PiglinEntity;Lnet/minecraft/entity/ItemEntity;)V", at = @At(value = "INVOKE", target = "Lnet/minecraft/item/ItemStack;isOf(Lnet/minecraft/item/Item;)Z"))
+	private static boolean nuggetLootRedirect(ItemStack stack, Item item) {
+		return stack.isOf(item) || stack.isIn(Piglib.PIGLIN_LOVED_NUGGETS);
 	}
 
 	@Inject(method = "canGather(Lnet/minecraft/entity/mob/PiglinEntity;Lnet/minecraft/item/ItemStack;)Z", at = @At(value = "INVOKE_ASSIGN", target = "Lnet/minecraft/entity/mob/PiglinEntity;canInsertIntoInventory(Lnet/minecraft/item/ItemStack;)Z"), cancellable = true, locals = LocalCapture.CAPTURE_FAILHARD)
-	private static void canGatherInject(PiglinEntity piglin, ItemStack stack, CallbackInfoReturnable<Boolean> cir, Item item, boolean bl) {
-		if(item.isIn(Piglib.PIGLIN_LOVED_NUGGETS)) cir.setReturnValue(bl);
+	private static void canGatherInject(PiglinEntity piglin, ItemStack stack, CallbackInfoReturnable<Boolean> cir, boolean bl) {
+		if(stack.isIn(Piglib.PIGLIN_LOVED_NUGGETS)) cir.setReturnValue(bl);
 	}
 
-	@Inject(method = "isGoldenItem(Lnet/minecraft/item/Item;)Z", at = @At("RETURN"), cancellable = true)
-	private static void isGoldenItemInject(Item item, CallbackInfoReturnable<Boolean> cir) {
-		cir.setReturnValue(cir.getReturnValue() || Piglib.shouldAdmire(item));
+	@Inject(method = "isGoldenItem(Lnet/minecraft/item/ItemStack;)Z", at = @At("RETURN"), cancellable = true)
+	private static void isGoldenItemInject(ItemStack stack, CallbackInfoReturnable<Boolean> cir) {
+		cir.setReturnValue(cir.getReturnValue() || Piglib.shouldAdmire(stack));
 	}
 }
