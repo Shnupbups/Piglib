@@ -44,14 +44,14 @@ import java.util.Iterator;
 
 @Mixin(PiglinBrain.class)
 public abstract class PiglinBrainMixin {
-	@Inject(method = "acceptsForBarter(Lnet/minecraft/item/ItemStack;)Z", at = @At("RETURN"), cancellable = true)
+	@Inject(method = "acceptsForBarter", at = @At("RETURN"), cancellable = true)
 	private static void acceptsForBarterInject(ItemStack stack, CallbackInfoReturnable<Boolean> cir) {
 		if (stack.isIn(Piglib.PIGLIN_BARTERING_ITEMS)) {
 			cir.setReturnValue(true);
 		}
 	}
 
-	@Inject(method = "wearsGoldArmor(Lnet/minecraft/entity/LivingEntity;)Z", at = @At(value = "INVOKE_ASSIGN", target = "Lnet/minecraft/item/ItemStack;getItem()Lnet/minecraft/item/Item;"), cancellable = true, locals = LocalCapture.CAPTURE_FAILHARD)
+	@Inject(method = "wearsGoldArmor", at = @At(value = "INVOKE_ASSIGN", target = "Lnet/minecraft/item/ItemStack;getItem()Lnet/minecraft/item/Item;"), cancellable = true, locals = LocalCapture.CAPTURE_FAILHARD)
 	private static void wearsGoldArmorInject(LivingEntity entity, CallbackInfoReturnable<Boolean> cir, Iterable<ItemStack> iterable, Iterator iterator, ItemStack stack, Item item) {
 		if (stack.isIn(Piglib.PIGLIN_SAFE_ARMOR)) {
 			cir.setReturnValue(true);
@@ -63,12 +63,12 @@ public abstract class PiglinBrainMixin {
 		return stack.isOf(item) || stack.isIn(Piglib.PIGLIN_LOVED_NUGGETS);
 	}
 
-	@Inject(method = "canGather(Lnet/minecraft/entity/mob/PiglinEntity;Lnet/minecraft/item/ItemStack;)Z", at = @At(value = "INVOKE_ASSIGN", target = "Lnet/minecraft/entity/mob/PiglinEntity;canInsertIntoInventory(Lnet/minecraft/item/ItemStack;)Z"), cancellable = true, locals = LocalCapture.CAPTURE_FAILHARD)
+	@Inject(method = "canGather", at = @At(value = "INVOKE_ASSIGN", target = "Lnet/minecraft/entity/mob/PiglinEntity;canInsertIntoInventory(Lnet/minecraft/item/ItemStack;)Z"), cancellable = true, locals = LocalCapture.CAPTURE_FAILHARD)
 	private static void canGatherInject(PiglinEntity piglin, ItemStack stack, CallbackInfoReturnable<Boolean> cir, boolean bl) {
 		if(stack.isIn(Piglib.PIGLIN_LOVED_NUGGETS)) cir.setReturnValue(bl);
 	}
 
-	@Inject(method = "isGoldenItem(Lnet/minecraft/item/ItemStack;)Z", at = @At("RETURN"), cancellable = true)
+	@Inject(method = "isGoldenItem", at = @At("RETURN"), cancellable = true)
 	private static void isGoldenItemInject(ItemStack stack, CallbackInfoReturnable<Boolean> cir) {
 		cir.setReturnValue(cir.getReturnValue() || Piglib.shouldAdmire(stack));
 	}
