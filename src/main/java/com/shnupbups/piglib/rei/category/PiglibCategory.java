@@ -2,7 +2,6 @@ package com.shnupbups.piglib.rei.category;
 
 import com.google.common.collect.Lists;
 import com.shnupbups.piglib.rei.ScrollableSlotsWidget;
-import com.shnupbups.piglib.rei.display.BarteringDisplay;
 import com.shnupbups.piglib.rei.display.PiglibDisplay;
 import me.shedaniel.math.Point;
 import me.shedaniel.math.Rectangle;

@@ -21,30 +21,26 @@
  * SOFTWARE.
  */
 
-package com.shnupbups.piglib.rei.category;
+package com.shnupbups.piglib.rei.display;
 
 import com.shnupbups.piglib.rei.PiglibPlugin;
-import com.shnupbups.piglib.rei.display.PiglinSafeArmorDisplay;
-import me.shedaniel.rei.api.client.gui.Renderer;
 import me.shedaniel.rei.api.common.category.CategoryIdentifier;
-import me.shedaniel.rei.api.common.util.EntryStacks;
-import net.minecraft.item.Items;
-import net.minecraft.text.Text;
-import net.minecraft.text.TranslatableText;
+import me.shedaniel.rei.api.common.entry.EntryIngredient;
+import net.minecraft.item.ItemStack;
 
-public class PiglinSafeArmorCategory extends PiglibCategory<PiglinSafeArmorDisplay> {
-    @Override
-    public CategoryIdentifier<? extends PiglinSafeArmorDisplay> getCategoryIdentifier() {
-        return PiglibPlugin.PIGLIN_SAFE_ARMOR;
+import java.util.List;
+
+public class GuardedByPiglinsDisplay extends PiglibDisplay {
+    public GuardedByPiglinsDisplay(List<ItemStack> entries) {
+        super(entries);
     }
 
-    @Override
-    public Text getTitle() {
-        return new TranslatableText("category.piglib.piglin_safe_armor");
+    public GuardedByPiglinsDisplay(List<EntryIngredient> inputs, List<EntryIngredient> outputs) {
+        super(inputs, outputs);
     }
-
+    
     @Override
-    public Renderer getIcon() {
-        return EntryStacks.of(Items.GOLDEN_CHESTPLATE);
+    public CategoryIdentifier<?> getCategoryIdentifier() {
+        return PiglibPlugin.GUARDED_BY_PIGLINS;
     }
 }

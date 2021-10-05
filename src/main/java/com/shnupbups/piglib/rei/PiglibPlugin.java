@@ -11,6 +11,7 @@ public class PiglibPlugin implements REIServerPlugin {
 	public static final CategoryIdentifier<PiglinLovedDisplay> PIGLIN_LOVED = CategoryIdentifier.of(Piglib.MOD_ID, "plugins/piglin_loved");
 	public static final CategoryIdentifier<PiglinSafeArmorDisplay> PIGLIN_SAFE_ARMOR = CategoryIdentifier.of(Piglib.MOD_ID, "plugins/piglin_safe_armor");
 	public static final CategoryIdentifier<PiglinRepellentsDisplay> PIGLIN_REPELLENTS = CategoryIdentifier.of(Piglib.MOD_ID, "plugins/piglin_repellents");
+	public static final CategoryIdentifier<GuardedByPiglinsDisplay> GUARDED_BY_PIGLINS = CategoryIdentifier.of(Piglib.MOD_ID, "plugins/guarded_by_piglins");
 
 	@Override
 	public void registerDisplaySerializer(DisplaySerializerRegistry registry) {
@@ -18,5 +19,6 @@ public class PiglibPlugin implements REIServerPlugin {
 		registry.register(PIGLIN_LOVED, PiglibDisplay.serializer(PiglinLovedDisplay::new));
 		registry.register(PIGLIN_SAFE_ARMOR, PiglibDisplay.serializer(PiglinSafeArmorDisplay::new));
 		registry.register(PIGLIN_REPELLENTS, PiglibDisplay.serializer(PiglinRepellentsDisplay::new));
+		registry.register(GUARDED_BY_PIGLINS, PiglibDisplay.serializer(GuardedByPiglinsDisplay::new));
 	}
 }

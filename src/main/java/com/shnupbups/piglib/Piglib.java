@@ -1,7 +1,7 @@
 package com.shnupbups.piglib;
 
 import net.fabricmc.api.ModInitializer;
-import net.fabricmc.fabric.api.tag.TagRegistry;
+import net.fabricmc.fabric.api.tag.TagFactory;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tag.ItemTags;
@@ -21,9 +21,9 @@ public class Piglib implements ModInitializer {
 
 	@Override
 	public void onInitialize() {
-		PIGLIN_SAFE_ARMOR = TagRegistry.item(id("piglin_safe_armor"));
-		PIGLIN_LOVED_NUGGETS = TagRegistry.item(id("piglin_loved_nuggets"));
-		PIGLIN_BARTERING_ITEMS = TagRegistry.item(id("piglin_bartering_items"));
+		PIGLIN_SAFE_ARMOR = TagFactory.ITEM.create(id("piglin_safe_armor"));
+		PIGLIN_LOVED_NUGGETS = TagFactory.ITEM.create(id("piglin_loved_nuggets"));
+		PIGLIN_BARTERING_ITEMS = TagFactory.ITEM.create(id("piglin_bartering_items"));
 	}
 	
 	public static Identifier id(String id) {
