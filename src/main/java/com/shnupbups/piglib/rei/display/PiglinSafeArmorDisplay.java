@@ -23,24 +23,26 @@
 
 package com.shnupbups.piglib.rei.display;
 
-import com.shnupbups.piglib.rei.PiglibPlugin;
-import me.shedaniel.rei.api.common.category.CategoryIdentifier;
-import me.shedaniel.rei.api.common.entry.EntryIngredient;
-import net.minecraft.item.ItemStack;
-
 import java.util.List;
 
-public class PiglinSafeArmorDisplay extends PiglibDisplay {
-    public PiglinSafeArmorDisplay(List<ItemStack> entries) {
-        super(entries);
-    }
+import net.minecraft.item.ItemStack;
 
-    public PiglinSafeArmorDisplay(List<EntryIngredient> inputs, List<EntryIngredient> outputs) {
-        super(inputs, outputs);
-    }
-    
-    @Override
-    public CategoryIdentifier<?> getCategoryIdentifier() {
-        return PiglibPlugin.PIGLIN_SAFE_ARMOR;
-    }
+import me.shedaniel.rei.api.common.category.CategoryIdentifier;
+import me.shedaniel.rei.api.common.entry.EntryIngredient;
+
+import com.shnupbups.piglib.rei.PiglibPlugin;
+
+public class PiglinSafeArmorDisplay extends PiglibDisplay {
+	public PiglinSafeArmorDisplay(List<ItemStack> entries) {
+		super(entries);
+	}
+
+	public PiglinSafeArmorDisplay(List<EntryIngredient> inputs, List<EntryIngredient> outputs) {
+		super(inputs, outputs);
+	}
+
+	@Override
+	public CategoryIdentifier<?> getCategoryIdentifier() {
+		return PiglibPlugin.PIGLIN_SAFE_ARMOR;
+	}
 }

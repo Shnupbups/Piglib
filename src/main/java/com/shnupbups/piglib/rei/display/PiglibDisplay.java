@@ -23,28 +23,29 @@
 
 package com.shnupbups.piglib.rei.display;
 
-import me.shedaniel.rei.api.common.display.basic.BasicDisplay;
-import me.shedaniel.rei.api.common.entry.EntryIngredient;
-import me.shedaniel.rei.api.common.util.EntryIngredients;
-import net.minecraft.item.ItemStack;
-
 import java.util.Collections;
 import java.util.List;
 
+import net.minecraft.item.ItemStack;
+
+import me.shedaniel.rei.api.common.display.basic.BasicDisplay;
+import me.shedaniel.rei.api.common.entry.EntryIngredient;
+import me.shedaniel.rei.api.common.util.EntryIngredients;
+
 public abstract class PiglibDisplay extends BasicDisplay {
-    public PiglibDisplay(List<ItemStack> entries) {
-        this(Collections.singletonList(EntryIngredients.ofItemStacks(entries)), Collections.emptyList());
-    }
-    
-    public PiglibDisplay(List<EntryIngredient> inputs, List<EntryIngredient> outputs) {
-        super(inputs, outputs);
-    }
-    
-    public EntryIngredient getEntries() {
-        return getInputEntries().get(0);
-    }
-    
-    public static <T extends PiglibDisplay> Serializer<T> serializer(Serializer.SimpleRecipeLessConstructor<T> constructor) {
-        return Serializer.ofSimpleRecipeLess(constructor);
-    }
+	public PiglibDisplay(List<ItemStack> entries) {
+		this(Collections.singletonList(EntryIngredients.ofItemStacks(entries)), Collections.emptyList());
+	}
+
+	public PiglibDisplay(List<EntryIngredient> inputs, List<EntryIngredient> outputs) {
+		super(inputs, outputs);
+	}
+
+	public static <T extends PiglibDisplay> Serializer<T> serializer(Serializer.SimpleRecipeLessConstructor<T> constructor) {
+		return Serializer.ofSimpleRecipeLess(constructor);
+	}
+
+	public EntryIngredient getEntries() {
+		return getInputEntries().get(0);
+	}
 }

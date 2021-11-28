@@ -1,10 +1,15 @@
 package com.shnupbups.piglib.rei;
 
-import com.shnupbups.piglib.Piglib;
-import com.shnupbups.piglib.rei.display.*;
 import me.shedaniel.rei.api.common.category.CategoryIdentifier;
 import me.shedaniel.rei.api.common.display.DisplaySerializerRegistry;
 import me.shedaniel.rei.api.common.plugins.REIServerPlugin;
+
+import com.shnupbups.piglib.Piglib;
+import com.shnupbups.piglib.rei.display.BarteringDisplay;
+import com.shnupbups.piglib.rei.display.PiglibDisplay;
+import com.shnupbups.piglib.rei.display.PiglinLovedDisplay;
+import com.shnupbups.piglib.rei.display.PiglinRepellentsDisplay;
+import com.shnupbups.piglib.rei.display.PiglinSafeArmorDisplay;
 
 public class PiglibPlugin implements REIServerPlugin {
 	public static final CategoryIdentifier<BarteringDisplay> BARTERING = CategoryIdentifier.of(Piglib.MOD_ID, "plugins/bartering");

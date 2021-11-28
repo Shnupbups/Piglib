@@ -23,24 +23,26 @@
 
 package com.shnupbups.piglib.rei.display;
 
-import com.shnupbups.piglib.rei.PiglibPlugin;
-import me.shedaniel.rei.api.common.category.CategoryIdentifier;
-import me.shedaniel.rei.api.common.entry.EntryIngredient;
-import net.minecraft.item.ItemStack;
-
 import java.util.List;
 
+import net.minecraft.item.ItemStack;
+
+import me.shedaniel.rei.api.common.category.CategoryIdentifier;
+import me.shedaniel.rei.api.common.entry.EntryIngredient;
+
+import com.shnupbups.piglib.rei.PiglibPlugin;
+
 public class BarteringDisplay extends PiglibDisplay {
-    public BarteringDisplay(List<ItemStack> entries) {
-        super(entries);
-    }
-    
-    public BarteringDisplay(List<EntryIngredient> inputs, List<EntryIngredient> outputs) {
-        super(inputs, outputs);
-    }
-    
-    @Override
-    public CategoryIdentifier<?> getCategoryIdentifier() {
-        return PiglibPlugin.BARTERING;
-    }
+	public BarteringDisplay(List<ItemStack> entries) {
+		super(entries);
+	}
+
+	public BarteringDisplay(List<EntryIngredient> inputs, List<EntryIngredient> outputs) {
+		super(inputs, outputs);
+	}
+
+	@Override
+	public CategoryIdentifier<?> getCategoryIdentifier() {
+		return PiglibPlugin.BARTERING;
+	}
 }

@@ -23,43 +23,30 @@
 
 package com.shnupbups.piglib.rei.category;
 
-import com.google.common.collect.Lists;
-import com.shnupbups.piglib.rei.PiglibPlugin;
-import com.shnupbups.piglib.rei.ScrollableSlotsWidget;
-import com.shnupbups.piglib.rei.display.PiglinLovedDisplay;
-import com.shnupbups.piglib.rei.display.PiglinRepellentsDisplay;
-import me.shedaniel.math.Point;
-import me.shedaniel.math.Rectangle;
-import me.shedaniel.rei.api.client.gui.DisplayRenderer;
-import me.shedaniel.rei.api.client.gui.Renderer;
-import me.shedaniel.rei.api.client.gui.widgets.Widget;
-import me.shedaniel.rei.api.client.gui.widgets.Widgets;
-import me.shedaniel.rei.api.client.registry.display.DisplayCategory;
-import me.shedaniel.rei.api.common.category.CategoryIdentifier;
-import me.shedaniel.rei.api.common.util.CollectionUtils;
-import me.shedaniel.rei.api.common.util.EntryStacks;
-import net.minecraft.block.Blocks;
-import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.item.Items;
 import net.minecraft.text.Text;
 import net.minecraft.text.TranslatableText;
 
-import java.util.List;
+import me.shedaniel.rei.api.client.gui.Renderer;
+import me.shedaniel.rei.api.common.category.CategoryIdentifier;
+import me.shedaniel.rei.api.common.util.EntryStacks;
+
+import com.shnupbups.piglib.rei.PiglibPlugin;
+import com.shnupbups.piglib.rei.display.PiglinRepellentsDisplay;
 
 public class PiglinRepellentsCategory extends PiglibCategory<PiglinRepellentsDisplay> {
-    @Override
-    public CategoryIdentifier<? extends PiglinRepellentsDisplay> getCategoryIdentifier() {
-        return PiglibPlugin.PIGLIN_REPELLENTS;
-    }
+	@Override
+	public CategoryIdentifier<? extends PiglinRepellentsDisplay> getCategoryIdentifier() {
+		return PiglibPlugin.PIGLIN_REPELLENTS;
+	}
 
-    @Override
-    public Text getTitle() {
-        return new TranslatableText("category.piglib.piglin_repellents");
-    }
+	@Override
+	public Text getTitle() {
+		return new TranslatableText("category.piglib.piglin_repellents");
+	}
 
-    @Override
-    public Renderer getIcon() {
-        return EntryStacks.of(Items.SOUL_LANTERN);
-    }
+	@Override
+	public Renderer getIcon() {
+		return EntryStacks.of(Items.SOUL_LANTERN);
+	}
 }

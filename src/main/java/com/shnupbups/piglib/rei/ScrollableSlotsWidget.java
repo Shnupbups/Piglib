@@ -1,6 +1,14 @@
 package com.shnupbups.piglib.rei;
 
+import java.util.List;
+import java.util.Objects;
+
 import com.google.common.collect.Lists;
+
+import net.minecraft.client.gui.Element;
+import net.minecraft.client.util.math.MatrixStack;
+import net.minecraft.util.math.MathHelper;
+
 import me.shedaniel.clothconfig2.ClothConfigInitializer;
 import me.shedaniel.clothconfig2.api.ScissorsHandler;
 import me.shedaniel.clothconfig2.api.ScrollingContainer;
@@ -8,16 +16,10 @@ import me.shedaniel.math.Rectangle;
 import me.shedaniel.rei.api.client.REIRuntime;
 import me.shedaniel.rei.api.client.gui.widgets.Slot;
 import me.shedaniel.rei.api.client.gui.widgets.WidgetWithBounds;
-import net.minecraft.client.gui.Element;
-import net.minecraft.client.util.math.MatrixStack;
-import net.minecraft.util.math.MathHelper;
 
-import java.util.List;
-import java.util.Objects;
-
-public class ScrollableSlotsWidget  extends WidgetWithBounds {
-	private Rectangle bounds;
-	private List<Slot> widgets;
+public class ScrollableSlotsWidget extends WidgetWithBounds {
+	private final Rectangle bounds;
+	private final List<Slot> widgets;
 	private final ScrollingContainer scrolling = new ScrollingContainer() {
 		@Override
 		public Rectangle getBounds() {
@@ -37,9 +39,9 @@ public class ScrollableSlotsWidget  extends WidgetWithBounds {
 	}
 
 	@Override
-	public boolean mouseScrolled(double double_1, double double_2, double double_3) {
-		if (containsMouse(double_1, double_2)) {
-			scrolling.offset(ClothConfigInitializer.getScrollStep() * -double_3, true);
+	public boolean mouseScrolled(double mouseX, double mouseY, double amount) {
+		if (containsMouse(mouseX, mouseY)) {
+			scrolling.offset(ClothConfigInitializer.getScrollStep() * -amount, true);
 			return true;
 		}
 		return false;
