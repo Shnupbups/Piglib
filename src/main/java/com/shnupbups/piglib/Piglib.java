@@ -12,9 +12,9 @@ import net.fabricmc.fabric.api.tag.TagFactory;
 public class Piglib implements ModInitializer {
 	public static final String MOD_ID = "piglib";
 
-	public static Tag<Item> PIGLIN_SAFE_ARMOR;
-	public static Tag<Item> PIGLIN_LOVED_NUGGETS;
-	public static Tag<Item> PIGLIN_BARTERING_ITEMS;
+	public static Tag.Identified<Item> PIGLIN_SAFE_ARMOR;
+	public static Tag.Identified<Item> PIGLIN_LOVED_NUGGETS;
+	public static Tag.Identified<Item> PIGLIN_BARTERING_ITEMS;
 
 	public static boolean shouldAdmire(ItemStack stack) {
 		return stack.isIn(ItemTags.PIGLIN_LOVED);
