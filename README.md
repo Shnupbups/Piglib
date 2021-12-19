@@ -1,16 +1,16 @@
 # Piglib
-Tags for Piglin stuff. Use Jitpack for JiJ.
+Tags for Piglin stuff.
 
-## How to use Jitpack
+## How to use in your mod
 In your `build.gradle`, put this in the `repositories` block
 ```groovy
 maven {
-  url = "https://jitpack.io"
-  name = "Jitpack"
+  url = "https://maven.shedaniel.me/"
+  name = "Shedaniel"
 }
 ```
 and this in the `dependencies` block
 ```groovy
-modApi "com.github.Shnupbups:Piglib:1.0"
-include "com.github.Shnupbups:Piglib:1.0"
+modApi "com.shnupbups:Piglib:1.1.1+fabric-mc1.18"
+include "com.shnupbups:Piglib:1.1.1+fabric-mc1.18"
 ```
