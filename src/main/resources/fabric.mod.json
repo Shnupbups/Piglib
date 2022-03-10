@@ -8,6 +8,11 @@
   "authors": [
     "Shnupbups"
   ],
+  "contact": {
+    "homepage": "https://www.curseforge.com/minecraft/mc-mods/piglib",
+    "sources": "https://github.com/Shnupbups/Piglib",
+    "issues": "https://github.com/Shnupbups/Piglib/issues"
+  },
 
   "license": "LGPLv3",
   "icon": "icon.png",
