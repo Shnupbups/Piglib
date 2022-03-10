@@ -3,18 +3,18 @@ package com.shnupbups.piglib;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tag.ItemTags;
-import net.minecraft.tag.Tag;
+import net.minecraft.tag.TagKey;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.registry.Registry;
 
 import net.fabricmc.api.ModInitializer;
-import net.fabricmc.fabric.api.tag.TagFactory;
 
 public class Piglib implements ModInitializer {
 	public static final String MOD_ID = "piglib";
 
-	public static Tag.Identified<Item> PIGLIN_SAFE_ARMOR;
-	public static Tag.Identified<Item> PIGLIN_LOVED_NUGGETS;
-	public static Tag.Identified<Item> PIGLIN_BARTERING_ITEMS;
+	public static TagKey<Item> PIGLIN_SAFE_ARMOR = TagKey.of(Registry.ITEM_KEY, id("piglin_safe_armor"));
+	public static TagKey<Item> PIGLIN_LOVED_NUGGETS = TagKey.of(Registry.ITEM_KEY, id("piglin_loved_nuggets"));
+	public static TagKey<Item> PIGLIN_BARTERING_ITEMS = TagKey.of(Registry.ITEM_KEY, id("piglin_bartering_items"));
 
 	public static boolean shouldAdmire(ItemStack stack) {
 		return stack.isIn(ItemTags.PIGLIN_LOVED);
@@ -26,8 +26,6 @@ public class Piglib implements ModInitializer {
 
 	@Override
 	public void onInitialize() {
-		PIGLIN_SAFE_ARMOR = TagFactory.ITEM.create(id("piglin_safe_armor"));
-		PIGLIN_LOVED_NUGGETS = TagFactory.ITEM.create(id("piglin_loved_nuggets"));
-		PIGLIN_BARTERING_ITEMS = TagFactory.ITEM.create(id("piglin_bartering_items"));
+		// NO-OP
 	}
 }

@@ -4,9 +4,12 @@ import java.util.List;
 
 import com.google.common.collect.Lists;
 
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.tag.ItemTags;
+import net.minecraft.util.registry.Registry;
+import net.minecraft.util.registry.RegistryEntry;
 
 import me.shedaniel.rei.api.client.plugins.REIClientPlugin;
 import me.shedaniel.rei.api.client.registry.category.CategoryRegistry;
@@ -46,15 +49,15 @@ public class PiglibClientPlugin implements REIClientPlugin {
 
 	@Override
 	public void registerDisplays(DisplayRegistry registry) {
-		registry.add(new BarteringDisplay(CollectionUtils.map(Lists.newArrayList(Piglib.PIGLIN_BARTERING_ITEMS.values()), ItemStack::new)));
+		registry.add(new BarteringDisplay(CollectionUtils.map(Lists.newArrayList(Registry.ITEM.getOrCreateEntryList(Piglib.PIGLIN_BARTERING_ITEMS).stream().iterator()), ItemStack::new)));
 		registry.add(new PiglinLovedDisplay(getPiglinLovedStacks()));
-		registry.add(new PiglinSafeArmorDisplay(CollectionUtils.map(Lists.newArrayList(Piglib.PIGLIN_SAFE_ARMOR.values()), ItemStack::new)));
-		registry.add(new PiglinRepellentsDisplay(CollectionUtils.map(Lists.newArrayList(ItemTags.PIGLIN_REPELLENTS.values()), ItemStack::new)));
+		registry.add(new PiglinSafeArmorDisplay(CollectionUtils.map(Lists.newArrayList(Registry.ITEM.getOrCreateEntryList(Piglib.PIGLIN_SAFE_ARMOR).stream().iterator()), ItemStack::new)));
+		registry.add(new PiglinRepellentsDisplay(CollectionUtils.map(Lists.newArrayList(Registry.ITEM.getOrCreateEntryList(ItemTags.PIGLIN_REPELLENTS).stream().iterator()), ItemStack::new)));
 	}
 
 	public List<ItemStack> getPiglinLovedStacks() {
-		List<ItemStack> list = CollectionUtils.map(Lists.newArrayList(ItemTags.PIGLIN_LOVED.values()), ItemStack::new);
-		list.addAll(CollectionUtils.map(Lists.newArrayList(Piglib.PIGLIN_LOVED_NUGGETS.values()), (item) -> new ItemStack(item, 64)));
+		List<ItemStack> list = CollectionUtils.map(Lists.newArrayList(Registry.ITEM.getOrCreateEntryList(ItemTags.PIGLIN_LOVED).stream().iterator()), ItemStack::new);
+		list.addAll(CollectionUtils.map(Lists.newArrayList(Registry.ITEM.getOrCreateEntryList(Piglib.PIGLIN_LOVED_NUGGETS).stream().iterator()), (entry) -> new ItemStack(entry.value(), 64)));
 		return list;
 	}
 }
