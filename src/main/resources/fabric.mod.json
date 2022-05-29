@@ -22,9 +22,11 @@
     "main": [
       "com.shnupbups.piglib.Piglib"
     ],
-    "rei": [
-      "com.shnupbups.piglib.rei.PiglibPlugin",
+    "rei_client": [
       "com.shnupbups.piglib.rei.PiglibClientPlugin"
+    ],
+    "rei_server": [
+      "com.shnupbups.piglib.rei.PiglibPlugin"
     ]
   },
   "mixins": ["piglib.mixins.json"],

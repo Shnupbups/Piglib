@@ -25,7 +25,6 @@ package com.shnupbups.piglib.rei.category;
 
 import net.minecraft.item.Items;
 import net.minecraft.text.Text;
-import net.minecraft.text.TranslatableText;
 
 import me.shedaniel.rei.api.client.gui.Renderer;
 import me.shedaniel.rei.api.common.category.CategoryIdentifier;
@@ -42,7 +41,7 @@ public class BarteringCategory extends PiglibCategory<BarteringDisplay> {
 
 	@Override
 	public Text getTitle() {
-		return new TranslatableText("category.piglib.bartering");
+		return Text.translatable("category.piglib.bartering");
 	}
 
 	@Override

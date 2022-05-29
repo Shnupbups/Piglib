@@ -1,5 +1,5 @@
 plugins {
-	id 'fabric-loom' version '0.11-SNAPSHOT'
+	id 'fabric-loom' version '0.12-SNAPSHOT'
 	id 'maven-publish'
 }
 
@@ -33,6 +33,9 @@ dependencies {
 	
 	// RoughlyEnoughItems
 	modApi "me.shedaniel:RoughlyEnoughItems-fabric:${project.rei_version}"
+	
+	// Architectury Fabric
+	modRuntimeOnly "dev.architectury:architectury-fabric:${project.arch_version}"
 }
 
 java {

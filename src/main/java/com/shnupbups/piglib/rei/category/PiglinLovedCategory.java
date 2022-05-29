@@ -25,7 +25,6 @@ package com.shnupbups.piglib.rei.category;
 
 import net.minecraft.item.Items;
 import net.minecraft.text.Text;
-import net.minecraft.text.TranslatableText;
 
 import me.shedaniel.rei.api.client.gui.Renderer;
 import me.shedaniel.rei.api.common.category.CategoryIdentifier;
@@ -42,7 +41,7 @@ public class PiglinLovedCategory extends PiglibCategory<PiglinLovedDisplay> {
 
 	@Override
 	public Text getTitle() {
-		return new TranslatableText("category.piglib.piglin_loved");
+		return Text.translatable("category.piglib.piglin_loved");
 	}
 
 	@Override
