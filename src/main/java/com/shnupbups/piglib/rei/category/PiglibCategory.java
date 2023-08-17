@@ -5,6 +5,7 @@ import java.util.List;
 import com.google.common.collect.Lists;
 
 import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.util.math.MatrixStack;
 
 import me.shedaniel.math.Point;
@@ -26,8 +27,8 @@ public abstract class PiglibCategory<T extends PiglibDisplay> implements Display
 		}
 
 		@Override
-		public void render(MatrixStack matrices, Rectangle rectangle, int mouseX, int mouseY, float delta) {
-			MinecraftClient.getInstance().textRenderer.draw(matrices, getTitle(), rectangle.x + 5, rectangle.y + 6, -1);
+		public void render(DrawContext context, Rectangle rectangle, int mouseX, int mouseY, float delta) {
+			context.drawText(MinecraftClient.getInstance().textRenderer, getTitle(), rectangle.x + 5, rectangle.y + 6, -1, false);
 		}
 	};
 

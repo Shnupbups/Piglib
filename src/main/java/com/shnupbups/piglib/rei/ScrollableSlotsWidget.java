@@ -5,6 +5,7 @@ import java.util.Objects;
 
 import com.google.common.collect.Lists;
 
+import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.Element;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.math.MathHelper;
@@ -67,7 +68,7 @@ public class ScrollableSlotsWidget extends WidgetWithBounds {
 	}
 
 	@Override
-	public void render(MatrixStack matrices, int mouseX, int mouseY, float delta) {
+	public void render(DrawContext context, int mouseX, int mouseY, float delta) {
 		scrolling.updatePosition(delta);
 		Rectangle innerBounds = scrolling.getScissorBounds();
 		ScissorsHandler.INSTANCE.scissor(innerBounds);
@@ -78,12 +79,12 @@ public class ScrollableSlotsWidget extends WidgetWithBounds {
 					break;
 				Slot widget = widgets.get(index);
 				widget.getBounds().setLocation(bounds.x + 1 + x * 18, (int) (bounds.y + 1 + y * 18 - scrolling.scrollAmount));
-				widget.render(matrices, mouseX, mouseY, delta);
+				widget.render(context, mouseX, mouseY, delta);
 			}
 		}
 		ScissorsHandler.INSTANCE.removeLastScissor();
 		ScissorsHandler.INSTANCE.scissor(scrolling.getBounds());
-		scrolling.renderScrollBar(0xff000000, 1, REIRuntime.getInstance().isDarkThemeEnabled() ? 0.8f : 1f);
+		scrolling.renderScrollBar(context);
 		ScissorsHandler.INSTANCE.removeLastScissor();
 	}
 
