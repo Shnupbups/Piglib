@@ -23,14 +23,12 @@
 
 package com.shnupbups.piglib.rei.display;
 
-import java.util.List;
-
-import net.minecraft.item.ItemStack;
-
+import com.shnupbups.piglib.rei.PiglibPlugin;
 import me.shedaniel.rei.api.common.category.CategoryIdentifier;
 import me.shedaniel.rei.api.common.entry.EntryIngredient;
+import net.minecraft.item.ItemStack;
 
-import com.shnupbups.piglib.rei.PiglibPlugin;
+import java.util.List;
 
 public class PiglinLovedDisplay extends PiglibDisplay {
 	public PiglinLovedDisplay(List<ItemStack> entries) {

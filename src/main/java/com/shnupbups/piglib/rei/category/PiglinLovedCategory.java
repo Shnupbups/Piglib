@@ -23,15 +23,13 @@
 
 package com.shnupbups.piglib.rei.category;
 
-import net.minecraft.item.Items;
-import net.minecraft.text.Text;
-
+import com.shnupbups.piglib.rei.PiglibPlugin;
+import com.shnupbups.piglib.rei.display.PiglinLovedDisplay;
 import me.shedaniel.rei.api.client.gui.Renderer;
 import me.shedaniel.rei.api.common.category.CategoryIdentifier;
 import me.shedaniel.rei.api.common.util.EntryStacks;
-
-import com.shnupbups.piglib.rei.PiglibPlugin;
-import com.shnupbups.piglib.rei.display.PiglinLovedDisplay;
+import net.minecraft.item.Items;
+import net.minecraft.text.Text;
 
 public class PiglinLovedCategory extends PiglibCategory<PiglinLovedDisplay> {
 	@Override

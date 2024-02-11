@@ -24,19 +24,18 @@
 
 package com.shnupbups.piglib.mixin;
 
+import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
+import com.shnupbups.piglib.Piglib;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.mob.AbstractPiglinEntity;
 import net.minecraft.entity.mob.PiglinEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
-
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-
-import com.shnupbups.piglib.Piglib;
 
 @Mixin(PiglinEntity.class)
 public abstract class PiglinEntityMixin extends AbstractPiglinEntity {
@@ -44,12 +43,8 @@ public abstract class PiglinEntityMixin extends AbstractPiglinEntity {
 		super(entityType, world);
 	}
 
-	@Inject(method = "equipToOffHand(Lnet/minecraft/item/ItemStack;)V", at = @At("HEAD"), cancellable = true)
-	public void equipToOffHandInject(ItemStack stack, CallbackInfo ci) {
-		if (stack.isIn(Piglib.PIGLIN_BARTERING_ITEMS)) {
-			this.equipStack(EquipmentSlot.OFFHAND, stack);
-			this.updateDropChances(EquipmentSlot.OFFHAND);
-			ci.cancel();
-		}
+	@ModifyExpressionValue(method = "equipToOffHand(Lnet/minecraft/item/ItemStack;)V", at = @At(value = "INVOKE", target = "Lnet/minecraft/item/ItemStack;isOf(Lnet/minecraft/item/Item;)Z"))
+	public boolean equipToOffHandModify(boolean original, ItemStack stack) {
+		return original || stack.isIn(Piglib.PIGLIN_BARTERING_ITEMS);
 	}
 }

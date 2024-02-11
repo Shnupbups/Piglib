@@ -1,13 +1,12 @@
 package com.shnupbups.piglib;
 
+import net.fabricmc.api.ModInitializer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.registry.RegistryKeys;
 import net.minecraft.registry.tag.ItemTags;
 import net.minecraft.registry.tag.TagKey;
 import net.minecraft.util.Identifier;
-
-import net.fabricmc.api.ModInitializer;
 
 public class Piglib implements ModInitializer {
 	public static final String MOD_ID = "piglib";

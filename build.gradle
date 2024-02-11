@@ -1,16 +1,15 @@
 plugins {
 	id 'fabric-loom' version "${loom_version}"
 	id 'maven-publish'
-	id "com.modrinth.minotaur" version "${minotaur_version}"
-	id 'net.darkhax.curseforgegradle' version "${cfgradle_version}"
+	id "me.modmuss50.mod-publish-plugin" version "${mod_publish_plugin_version}"
 }
 
-sourceCompatibility = JavaVersion.VERSION_17
-targetCompatibility = JavaVersion.VERSION_17
-
-archivesBaseName = project.mod_name
-version = project.mod_version + "+" + project.version_meta
+version = project.mod_version + "+" + project.version_meta + "-mc" + project.wider_minecraft_version
 group = project.maven_group
+
+base {
+	archivesName = project.mod_name
+}
 
 repositories {
 	maven { url "https://maven.terraformersmc.com/"}
@@ -40,28 +39,30 @@ dependencies {
 	modRuntimeOnly "dev.architectury:architectury-fabric:${project.arch_version}"
 }
 
-java {
-	withSourcesJar()
+processResources {
+	inputs.property "version", project.version
+
+	filesMatching("fabric.mod.json") {
+		expand "version": project.version
+	}
 }
 
 tasks.withType(JavaCompile).configureEach {
-	it.options.encoding = "UTF-8"
-
 	it.options.release = 17
 }
 
-processResources {
-	inputs.property "version", project.mod_version
+java {
+	withSourcesJar()
 
-	filesMatching("fabric.mod.json") {
-		expand "version": project.mod_version
-	}
+	sourceCompatibility = JavaVersion.VERSION_17
+	targetCompatibility = JavaVersion.VERSION_17
 }
 
 jar {
 	from("LICENSE") {
-		rename { "${it}_${project.archivesBaseName}" }
+		rename { "${it}_${project.base.archivesName.get()}"}
 	}
+	
 	manifest {
         attributes([
                 "Specification-Title"     : "${mod_name}",
@@ -76,25 +77,24 @@ jar {
     }
 }
 
-modrinth {
-	projectId = project.modrinth_project
-	uploadFile = remapJar
-	versionName = "${project.mod_version} for Minecraft ${project.minecraft_version}"
-	gameVersions = ["${project.minecraft_version}"]
-	dependencies {
-		required.project "fabric-api"
-	}
-}
-
-task publishCurseForge(type: net.darkhax.curseforgegradle.TaskPublishCurseForge) {
-    apiToken = findProperty('CF_TOKEN')
-    def projectId = project.cf_project
-
-    def mainFile = upload(projectId, remapJar)
-	mainFile.displayName = "${project.mod_version} for Minecraft ${project.minecraft_version}"
-	mainFile.addModLoader("Fabric")
-	mainFile.addGameVersion("${project.minecraft_version}")
-	mainFile.addRequirement("fabric-api")
+publishMods {
+	changelog = ""
+    type = STABLE
+	
+    file = remapJar.archiveFile
+    modLoaders.add("fabric")
+	
+	curseforge {
+        projectId = "${project.cf_project}"
+        accessToken = providers.environmentVariable("CF_TOKEN")
+        minecraftVersions.add("${project.minecraft_version}")
+    }
+	
+	modrinth {
+        projectId = "${project.modrinth_project}"
+        accessToken = providers.environmentVariable("MODRINTH_TOKEN")
+        minecraftVersions.add("${project.minecraft_version}")
+    }
 }
 
 publishing {

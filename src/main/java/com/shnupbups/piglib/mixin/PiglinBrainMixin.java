@@ -24,32 +24,31 @@
 
 package com.shnupbups.piglib.mixin;
 
-import java.util.Iterator;
-
+import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
+import com.llamalad7.mixinextras.injector.ModifyReturnValue;
+import com.llamalad7.mixinextras.sugar.Local;
+import com.shnupbups.piglib.Piglib;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.mob.PiglinBrain;
 import net.minecraft.entity.mob.PiglinEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.Redirect;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
-import org.spongepowered.asm.mixin.injection.callback.LocalCapture;
-
-import com.shnupbups.piglib.Piglib;
 
 @Mixin(PiglinBrain.class)
 public abstract class PiglinBrainMixin {
-	@Inject(method = "acceptsForBarter(Lnet/minecraft/item/ItemStack;)Z", at = @At("RETURN"), cancellable = true)
-	private static void acceptsForBarterInject(ItemStack stack, CallbackInfoReturnable<Boolean> cir) {
-		if (stack.isIn(Piglib.PIGLIN_BARTERING_ITEMS)) cir.setReturnValue(true);
+	@ModifyReturnValue(method = "acceptsForBarter(Lnet/minecraft/item/ItemStack;)Z", at = @At("RETURN"))
+	private static boolean acceptsForBarterModify(boolean original, ItemStack stack) {
+		if (stack.isIn(Piglib.PIGLIN_BARTERING_ITEMS)) return true;
+		return original;
 	}
 
-	@Inject(method = "wearsGoldArmor(Lnet/minecraft/entity/LivingEntity;)Z", at = @At(value = "INVOKE_ASSIGN", target = "Lnet/minecraft/item/ItemStack;getItem()Lnet/minecraft/item/Item;"), cancellable = true, locals = LocalCapture.CAPTURE_FAILHARD)
-	private static void wearsGoldArmorInject(LivingEntity entity, CallbackInfoReturnable<Boolean> cir, Iterable<ItemStack> iterable, Iterator iterator, ItemStack stack, Item item) {
+	@Inject(method = "wearsGoldArmor(Lnet/minecraft/entity/LivingEntity;)Z", at = @At(value = "INVOKE_ASSIGN", target = "Lnet/minecraft/item/ItemStack;getItem()Lnet/minecraft/item/Item;"), cancellable = true)
+	private static void wearsGoldArmorInject(LivingEntity entity, CallbackInfoReturnable<Boolean> cir, @Local ItemStack stack) {
 		if (stack.isIn(Piglib.PIGLIN_SAFE_ARMOR)) cir.setReturnValue(true);
 	}
 
@@ -58,8 +57,8 @@ public abstract class PiglinBrainMixin {
 		return stack.isOf(item) || stack.isIn(Piglib.PIGLIN_LOVED_NUGGETS);
 	}
 
-	@Inject(method = "canGather(Lnet/minecraft/entity/mob/PiglinEntity;Lnet/minecraft/item/ItemStack;)Z", at = @At(value = "INVOKE_ASSIGN", target = "Lnet/minecraft/entity/mob/PiglinEntity;canInsertIntoInventory(Lnet/minecraft/item/ItemStack;)Z"), cancellable = true, locals = LocalCapture.CAPTURE_FAILHARD)
-	private static void canGatherInject(PiglinEntity piglin, ItemStack stack, CallbackInfoReturnable<Boolean> cir, boolean bl) {
+	@Inject(method = "canGather(Lnet/minecraft/entity/mob/PiglinEntity;Lnet/minecraft/item/ItemStack;)Z", at = @At(value = "INVOKE", target = "Lnet/minecraft/item/ItemStack;isOf(Lnet/minecraft/item/Item;)Z"), cancellable = true)
+	private static void canGatherInject(PiglinEntity piglin, ItemStack stack, CallbackInfoReturnable<Boolean> cir, @Local boolean bl) {
 		// bl = piglin.canInsertIntoInventory(stack)
 		if (stack.isIn(Piglib.PIGLIN_LOVED_NUGGETS)) cir.setReturnValue(bl);
 	}

@@ -1,22 +1,18 @@
 package com.shnupbups.piglib.rei;
 
-import java.util.List;
-import java.util.Objects;
-
 import com.google.common.collect.Lists;
-
-import net.minecraft.client.gui.DrawContext;
-import net.minecraft.client.gui.Element;
-import net.minecraft.client.util.math.MatrixStack;
-import net.minecraft.util.math.MathHelper;
-
 import me.shedaniel.clothconfig2.ClothConfigInitializer;
 import me.shedaniel.clothconfig2.api.ScissorsHandler;
 import me.shedaniel.clothconfig2.api.ScrollingContainer;
 import me.shedaniel.math.Rectangle;
-import me.shedaniel.rei.api.client.REIRuntime;
 import me.shedaniel.rei.api.client.gui.widgets.Slot;
 import me.shedaniel.rei.api.client.gui.widgets.WidgetWithBounds;
+import net.minecraft.client.gui.DrawContext;
+import net.minecraft.client.gui.Element;
+import net.minecraft.util.math.MathHelper;
+
+import java.util.List;
+import java.util.Objects;
 
 public class ScrollableSlotsWidget extends WidgetWithBounds {
 	private final Rectangle bounds;
@@ -40,9 +36,9 @@ public class ScrollableSlotsWidget extends WidgetWithBounds {
 	}
 
 	@Override
-	public boolean mouseScrolled(double mouseX, double mouseY, double amount) {
-		if (containsMouse(mouseX, mouseY)) {
-			scrolling.offset(ClothConfigInitializer.getScrollStep() * -amount, true);
+	public boolean mouseScrolled(double mouseX, double mouseY, double amountX, double amountY) {
+		if (containsMouse(mouseX, mouseY) && amountY != 0) {
+			scrolling.offset(ClothConfigInitializer.getScrollStep() * -amountY, true);
 			return true;
 		}
 		return false;

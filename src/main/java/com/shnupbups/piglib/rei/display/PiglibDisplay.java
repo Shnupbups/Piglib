@@ -23,14 +23,13 @@
 
 package com.shnupbups.piglib.rei.display;
 
-import java.util.Collections;
-import java.util.List;
-
-import net.minecraft.item.ItemStack;
-
 import me.shedaniel.rei.api.common.display.basic.BasicDisplay;
 import me.shedaniel.rei.api.common.entry.EntryIngredient;
 import me.shedaniel.rei.api.common.util.EntryIngredients;
+import net.minecraft.item.ItemStack;
+
+import java.util.Collections;
+import java.util.List;
 
 public abstract class PiglibDisplay extends BasicDisplay {
 	public PiglibDisplay(List<ItemStack> entries) {

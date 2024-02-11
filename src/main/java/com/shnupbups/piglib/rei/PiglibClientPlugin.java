@@ -1,20 +1,6 @@
 package com.shnupbups.piglib.rei;
 
-import java.util.List;
-
 import com.google.common.collect.Lists;
-
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
-import net.minecraft.registry.Registries;
-import net.minecraft.registry.tag.ItemTags;
-
-import me.shedaniel.rei.api.client.plugins.REIClientPlugin;
-import me.shedaniel.rei.api.client.registry.category.CategoryRegistry;
-import me.shedaniel.rei.api.client.registry.display.DisplayRegistry;
-import me.shedaniel.rei.api.common.util.CollectionUtils;
-import me.shedaniel.rei.api.common.util.EntryIngredients;
-
 import com.shnupbups.piglib.Piglib;
 import com.shnupbups.piglib.rei.category.BarteringCategory;
 import com.shnupbups.piglib.rei.category.PiglinLovedCategory;
@@ -24,6 +10,17 @@ import com.shnupbups.piglib.rei.display.BarteringDisplay;
 import com.shnupbups.piglib.rei.display.PiglinLovedDisplay;
 import com.shnupbups.piglib.rei.display.PiglinRepellentsDisplay;
 import com.shnupbups.piglib.rei.display.PiglinSafeArmorDisplay;
+import me.shedaniel.rei.api.client.plugins.REIClientPlugin;
+import me.shedaniel.rei.api.client.registry.category.CategoryRegistry;
+import me.shedaniel.rei.api.client.registry.display.DisplayRegistry;
+import me.shedaniel.rei.api.common.util.CollectionUtils;
+import me.shedaniel.rei.api.common.util.EntryIngredients;
+import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
+import net.minecraft.registry.Registries;
+import net.minecraft.registry.tag.ItemTags;
+
+import java.util.List;
 
 public class PiglibClientPlugin implements REIClientPlugin {
 
